@@ -16,7 +16,7 @@ export const allPosts = async (req, res) => {
 export const createPost = async (req, res) => {
   try {
     const { title, text } = req.body;
-    const id = req.params.id; // req.user.id
+    const id = req.user.id;
     const userFound = await pool.query("SELECT * FROM users WHERE id = $1", [
       id,
     ]);
@@ -43,8 +43,7 @@ export const createPost = async (req, res) => {
 export const deletePost = async (req, res) => {
   try {
     const id = req.params.id;
-    // req.user.id
-    const { idUser } = req.body;
+    const idUser = req.user.id;
     console.log(idUser);
     const userFound = await pool.query("SELECT * FROM users WHERE id = $1", [
       idUser,
@@ -78,9 +77,9 @@ export const deletePost = async (req, res) => {
 
 export const changePost = async (req, res) => {
   try {
-    const { id, title, text } = req.body;
+    const { title, text } = req.body;
     const idPost = req.params.id;
-    // req.user.id
+    const id = req.user.id;
     const userFound = await pool.query("SELECT * FROM users WHERE id = $1", [
       id,
     ]);

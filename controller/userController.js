@@ -54,7 +54,7 @@ export const createUser = async (req, res) => {
 export const changeUser = async (req, res) => {
   try {
     const { first_name, last_name, age, email, password } = req.body;
-    const id = req.params.id; // req.user.id
+    const id = req.user.id;
     const userFound = await pool.query("SELECT * FROM users WHERE id = $1", [
       id,
     ]);
@@ -101,7 +101,7 @@ export const changeUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    const id = req.params.id; // req.user.id
+    const id = req.user.id;
     const userFound = await pool.query("SELECT * FROM users WHERE id = $1", [
       id,
     ]);

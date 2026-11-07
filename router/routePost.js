@@ -5,10 +5,11 @@ import {
   deletePost,
   changePost,
 } from "../controller/postController.js";
+import isAuth from "../middleware/isAuth.js";
 
 export const routePosts = express.Router();
 
 routePosts.get("/posts", allPosts);
-routePosts.post("/upload/:id", createPost); // Does not need normaly with auth
-routePosts.delete("/deletePost/:id", deletePost);
-routePosts.put("/changePost/:id", changePost);
+routePosts.post("/upload", isAuth, createPost);
+routePosts.delete("/deletePost/:id", isAuth, deletePost);
+routePosts.put("/changePost/:id", isAuth, changePost);

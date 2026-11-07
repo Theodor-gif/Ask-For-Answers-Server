@@ -15,9 +15,9 @@ export const allComments = async (req, res) => {
 
 export const createComment = async (req, res) => {
   try {
-    const id = req.params.id; // post_id
-    const { idUser, text } = req.body; // text
-    // req.user.id to take the user_id
+    const id = req.params.id;
+    const { text } = req.body;
+    const idUser = req.user.id;
     const userFound = await pool.query("SELECT * FROM users WHERE id = $1", [
       idUser,
     ]);
@@ -46,9 +46,9 @@ export const createComment = async (req, res) => {
 
 export const deleteComment = async (req, res) => {
   try {
-    const id = req.params.id; // comment_id
-    const { idUser } = req.body;
-    // req.user.id to take the user_id
+    const id = req.params.id;
+    const idUser = req.user.id;
+
     const userFound = await pool.query("SELECT * FROM users WHERE id = $1", [
       idUser,
     ]);
@@ -80,8 +80,8 @@ export const deleteComment = async (req, res) => {
 export const changeComment = async (req, res) => {
   try {
     const id = req.params.id; // comment_id
-    const { idUser, text } = req.body;
-    // req.user.id to take the user_id
+    const { text } = req.body;
+    const idUser = req.user.id;
     const userFound = await pool.query("SELECT * FROM users WHERE id = $1", [
       idUser,
     ]);
