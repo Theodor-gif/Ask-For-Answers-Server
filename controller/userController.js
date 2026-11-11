@@ -152,12 +152,9 @@ export const logUser = async (req, res) => {
     res.status(200).json({
       message: "Logged in succesfully",
       token,
-      user: [
-        userFound.rows[0].first_name,
-        userFound.rows[0].last_name,
-        userFound.rows[0].age,
-        userFound.rows[0].email,
-      ],
+      user: {
+        id: userFound.rows[0].id,
+      },
     });
   } catch (error) {
     console.log(error);
